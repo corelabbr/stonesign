@@ -24,7 +24,7 @@ gem 'mysql2', require: false
 gem 'oj'
 gem 'pagy'
 gem 'pdf-reader'
-gem 'pg', require: false
+gem 'pg', '~> 1.2', '>= 1.2.3', require: false
 gem 'premailer-rails'
 gem 'puma'
 gem 'rack'
