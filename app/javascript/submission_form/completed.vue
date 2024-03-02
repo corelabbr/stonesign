@@ -70,7 +70,7 @@
     >
       {{ t('signed_with') }}
       <a
-        href="https://www.stonesign.co/start"
+        href="https://www.stonesign.com.br/start"
         target="_blank"
         class="underline"
       >StoneSign</a> - {{ t('open_source_documents_software') }}

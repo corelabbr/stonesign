@@ -5,7 +5,7 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
-    #image: docuseal/docuseal:latest
+    #image: stonesign:latest
     build:
       context: .
     ports:

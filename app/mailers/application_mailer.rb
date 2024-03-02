@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ApplicationMailer < ActionMailer::Base
-  default from: 'StoneSign <hi@stonesign.co>'
+  default from: 'StoneSign <ola@stonesign.com.br>'
   layout 'mailer'
 
   register_interceptor ActionMailerConfigsInterceptor

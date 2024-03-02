@@ -144,7 +144,7 @@
         <a
           v-if="!isConnected"
           class="block link text-center mt-1"
-          href="https://www.stonesign.co/blog/accept-payments-and-request-signatures-with-ease"
+          href="https://www.stonesign.com.br/blog/accept-payments-and-request-signatures-with-ease"
           target="_blank"
           data-turbo="false"
         >Learn more</a>

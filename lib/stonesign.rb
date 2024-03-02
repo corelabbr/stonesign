@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Stonesign
-  PRODUCT_URL = 'https://www.stonesign.co'
+  PRODUCT_URL = 'https://www.stonesign.com.br'
   NEWSLETTER_URL = "#{PRODUCT_URL}/newsletters".freeze
   ENQUIRIES_URL = "#{PRODUCT_URL}/enquiries".freeze
   PRODUCT_NAME = 'StoneSign'
@@ -9,22 +9,22 @@ module Stonesign
   CORELAB_URL = 'https://www.corelab.com.br'
   DISCORD_URL = 'https://discord.gg/qygYCDGck9'
   TWITTER_URL = 'https://twitter.com/stonesignco'
-  TWITTER_HANDLE = '@stonesignco'
-  SUPPORT_EMAIL = 'support@stonesign.co'
+  TWITTER_HANDLE = '@stonesign'
+  SUPPORT_EMAIL = 'contato@stonesign.com.br'
   HOST = ENV.fetch('HOST', 'localhost')
   CONSOLE_URL = if Rails.env.development?
                   'http://console.localhost.io:3001'
                 elsif ENV['MULTITENANT'] == 'true'
                   "https://console.#{HOST}"
                 else
-                  'https://console.stonesign.co'
+                  'https://console.stonesign.com.br'
                 end
   CDN_URL = if Rails.env.development?
               'http://localhost:3000'
             elsif ENV['MULTITENANT'] == 'true'
               "https://cdn.#{HOST}"
             else
-              'https://cdn.stonesign.co'
+              'https://cdn.stonesign.com.br'
             end
 
   CERTS = JSON.parse(ENV.fetch('CERTS', '{}'))

@@ -2,7 +2,7 @@
 
 class ErrorsController < ActionController::Base
   ENTERPRISE_FEATURE_MESSAGE =
-    'This feature is available in Pro Edition: https://www.stonesign.co/pricing'
+    'This feature is available in Pro Edition: https://www.stonesign.com.br/pricing'
 
   ENTERPRISE_PATHS = [
     '/templates/html',
