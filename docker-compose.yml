@@ -5,14 +5,16 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
-    image: docuseal/docuseal:latest
+    #image: docuseal/docuseal:latest
+    build:
+      context: .
     ports:
       - 3000:3000
     volumes:
       - .:/data
     environment:
       - FORCE_SSL=${HOST}
-      - DATABASE_URL=postgresql://postgres:postgres@postgres:5432/docuseal
+      - DATABASE_URL=postgresql://postgres:postgres@postgres:5432/stonesign
 
   postgres:
     image: postgres:15
@@ -21,7 +23,7 @@ services:
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: docuseal
+      POSTGRES_DB: stonesign
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres"]
       interval: 5s

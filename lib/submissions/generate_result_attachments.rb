@@ -10,8 +10,8 @@ module Submissions
                   'Helvetica'
                 end
 
-    SIGN_REASON = 'Signed by %<name>s with DocuSeal.co'
-    SIGN_SIGNLE_REASON = 'Digitally signed with DocuSeal.co'
+    SIGN_REASON = 'Signed by %<name>s with StoneSign.co'
+    SIGN_SIGNLE_REASON = 'Digitally signed with StoneSign.co'
 
     RTL_REGEXP = /\A[\p{Hebrew}\p{Arabic}].*[\p{Hebrew}\p{Arabic}]\z/
 
@@ -51,7 +51,7 @@ module Submissions
 
           page[:Annots] ||= []
           page[:Annots] = page[:Annots].reject do |e|
-            e.present? && e[:A] && e[:A][:URI].to_s.starts_with?('file:///docuseal_field')
+            e.present? && e[:A] && e[:A][:URI].to_s.starts_with?('file:///stonesign_field')
           end
 
           width = page.box.width
@@ -126,7 +126,7 @@ module Submissions
                     height - (area['y'] * height) - lines[..next_index].sum(&:height) + height_diff
                   ],
                   A: { Type: :Action, S: :URI,
-                       URI: h.rails_blob_url(attachment, **Docuseal.default_url_options) }
+                       URI: h.rails_blob_url(attachment, **Stonesign.default_url_options) }
                 }
               )
 
@@ -337,10 +337,10 @@ module Submissions
     def fetch_sign_reason(submitter)
       reason_name = submitter.email || submitter.name || submitter.phone
 
-      return sign_reason(reason_name) if Docuseal.multitenant?
+      return sign_reason(reason_name) if Stonesign.multitenant?
 
       config =
-        if Docuseal.multitenant?
+        if Stonesign.multitenant?
           AccountConfig.where(account: submitter.account, key: AccountConfig::ESIGNING_PREFERENCE_KEY)
                        .first_or_initialize(value: 'multiple')
         else
@@ -357,7 +357,7 @@ module Submissions
     end
 
     def info_creator
-      "#{Docuseal.product_name} (#{Docuseal::PRODUCT_URL})"
+      "#{Stonesign.product_name} (#{Stonesign::PRODUCT_URL})"
     end
 
     def h

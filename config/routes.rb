@@ -17,7 +17,7 @@ Rails.application.routes.draw do
              end
 
   devise_scope :user do
-    if Docuseal.multitenant?
+    if Stonesign.multitenant?
       resource :registration, only: %i[show], path: 'sign_up'
       unauthenticated do
         resource :registration, only: %i[create], path: 'new' do
@@ -98,7 +98,7 @@ Rails.application.routes.draw do
   end
 
   scope '/settings', as: :settings do
-    unless Docuseal.multitenant?
+    unless Stonesign.multitenant?
       resources :storage, only: %i[index create], controller: 'storage_settings'
       resources :email, only: %i[index create], controller: 'email_smtp_settings'
       resources :sms, only: %i[index], controller: 'sms_settings'
@@ -108,7 +108,7 @@ Rails.application.routes.draw do
     resource :esign, only: %i[show create new update destroy], controller: 'esign_settings'
     resources :users, only: %i[index]
     resource :personalization, only: %i[show create], controller: 'personalization_settings'
-    if !Docuseal.multitenant? || Docuseal.demo?
+    if !Stonesign.multitenant? || Stonesign.demo?
       resources :api, only: %i[index create], controller: 'api_settings'
       resource :webhooks, only: %i[show create update], controller: 'webhook_settings'
     end

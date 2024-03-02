@@ -16,7 +16,7 @@ WORKDIR /app
 RUN apk add --no-cache nodejs yarn git build-base && \
     gem install shakapacker
 
-COPY ./package.json ./yarn.lock ./
+COPY ./package.json ./
 
 RUN yarn install --network-timeout 1000000
 
@@ -41,9 +41,10 @@ WORKDIR /app
 
 RUN apk add --no-cache build-base sqlite-dev libpq-dev mariadb-dev vips-dev vips-poppler poppler-utils vips-heif libc6-compat ttf-freefont && mkdir /fonts
 
-COPY ./Gemfile ./Gemfile.lock ./
+COPY ./Gemfile ./
 
-RUN bundle update --bundler && bundle install && rm -rf ~/.bundle
+RUN bundle install
+RUN bundle update --bundler && rm -rf ~/.bundle
 
 COPY ./bin ./bin
 COPY ./app ./app
@@ -61,8 +62,8 @@ COPY --from=webpack /app/public/packs ./public/packs
 RUN ln -s /fonts /app/public/fonts
 RUN bundle exec bootsnap precompile --gemfile app/ lib/
 
-WORKDIR /data/docuseal
-ENV WORKDIR=/data/docuseal
+WORKDIR /data/stonesign
+ENV WORKDIR=/data/stonesign
 
 EXPOSE 3000
 CMD ["/app/bin/rails", "server"]

@@ -98,7 +98,7 @@
       </table>
     </div>
     <% encrypted_config = EncryptedConfig.find_or_initialize_by(account: current_account, key: EncryptedConfig::TIMESTAMP_SERVER_URL_KEY) %>
-    <% if !Docuseal.multitenant? && can?(:manage, encrypted_config) %>
+    <% if !Stonesign.multitenant? && can?(:manage, encrypted_config) %>
       <div class="flex-grow max-w-xl">
         <div class="flex justify-between items-end mb-4 mt-8">
           <h2 class="text-3xl font-bold">Timestamp Server</h2>
@@ -123,7 +123,7 @@
         <% end %>
       </div>
     <% end %>
-    <% if !Docuseal.multitenant? %>
+    <% if !Stonesign.multitenant? %>
       <% account_config = AccountConfig.where(account: current_account, key: AccountConfig::ESIGNING_PREFERENCE_KEY).first_or_initialize(value: 'multiple') %>
       <% if can?(:manage, account_config) %>
         <div class="px-1 mt-8 max-w-xl">

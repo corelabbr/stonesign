@@ -1,4 +1,4 @@
-<% if Docuseal.demo? %><%= render 'shared/demo_alert' %><% end %>
+<% if Stonesign.demo? %><%= render 'shared/demo_alert' %><% end %>
 <% if @pagy.count > 0 || params[:q].present? || @template_folders.present? %>
   <div class="flex justify-between mb-4 items-center">
     <h1 class="text-4xl font-bold"><span class="hidden md:inline">Document</span> Templates</h1>
@@ -57,7 +57,7 @@
                 </div>
               </span>
             </div>
-            <input id="file_dropzone_input" name="files[]" class="hidden" data-action="change:file-dropzone#onSelectFiles" data-target="file-dropzone.input" type="file" accept="image/*, application/pdf<%= ', .docx, .doc, .xlsx, .xls' if Docuseal.multitenant? %>" multiple>
+            <input id="file_dropzone_input" name="files[]" class="hidden" data-action="change:file-dropzone#onSelectFiles" data-target="file-dropzone.input" type="file" accept="image/*, application/pdf<%= ', .docx, .doc, .xlsx, .xls' if Stonesign.multitenant? %>" multiple>
           </div>
         </label>
       </file-dropzone>
@@ -84,7 +84,7 @@
       <div class="flex items-center h-full">
         <div class="mx-auto">
           <div class="max-w-xl mx-auto">
-            <h1 class="text-5xl font-bold text-base-content">👋 Welcome to <%= Docuseal.product_name %></h1>
+            <h1 class="text-5xl font-bold text-base-content">👋 Welcome to <%= Stonesign.product_name %></h1>
           </div>
           <div class="max-w-lg mx-auto">
             <p class="py-6 text-gray-600">Streamline document workflows, from creating customizable templates to filling and signing document forms</p>

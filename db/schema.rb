@@ -17,7 +17,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_29_220819) do
   create_table "access_tokens", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.text "token", null: false
-    t.text "sha256", null: false
+    t.string "sha256", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["sha256"], name: "index_access_tokens_on_sha256", unique: true
@@ -136,7 +136,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_29_220819) do
     t.text "template_fields"
     t.text "template_schema"
     t.text "template_submitters"
-    t.text "source", null: false
+    t.string "source", null: false
     t.string "submitters_order", null: false
     t.string "slug", null: false
     t.text "preferences", null: false
@@ -229,7 +229,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_29_220819) do
     t.datetime "archived_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.text "uuid", null: false
+    t.string "uuid", null: false
     t.string "otp_secret"
     t.integer "consumed_timestep"
     t.boolean "otp_required_for_login", default: false, null: false

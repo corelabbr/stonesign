@@ -14,7 +14,7 @@ require_relative '../lib/api_path_consider_json_middleware'
 
 Bundler.require(*Rails.groups)
 
-module DocuSeal
+module StoneSign
   class Application < Rails::Application
     config.load_defaults 7.1
 

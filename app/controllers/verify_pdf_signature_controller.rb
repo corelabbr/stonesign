@@ -9,8 +9,8 @@ class VerifyPdfSignatureController < ApplicationController
         HexaPDF::Document.new(io: file.open)
       end
 
-    cert_data = if Docuseal.multitenant?
-                  Docuseal::CERTS
+    cert_data = if Stonesign.multitenant?
+                  Stonesign::CERTS
                 else
                   EncryptedConfig.find_by(key: EncryptedConfig::ESIGN_CERTS_KEY)&.value || {}
                 end

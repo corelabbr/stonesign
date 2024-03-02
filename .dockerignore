@@ -26,6 +26,6 @@
 /public/packs-test
 /public/packs
 /attachments
-/docuseal
+/stonesign
 .DS_Store
 .env

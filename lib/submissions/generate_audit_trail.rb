@@ -17,7 +17,7 @@ module Submissions
                        'Helvetica'
                      end
 
-    SIGN_REASON = 'Signed with DocuSeal.co'
+    SIGN_REASON = 'Signed with StoneSign.co'
     VERIFIED_TEXT = 'Verified'
     UNVERIFIED_TEXT = 'Unverified'
 
@@ -36,7 +36,7 @@ module Submissions
       account = submission.template.account
       pkcs = Accounts.load_signing_pkcs(account)
       tsa_url = Accounts.load_timeserver_url(account)
-      verify_url = Rails.application.routes.url_helpers.settings_esign_url(**Docuseal.default_url_options)
+      verify_url = Rails.application.routes.url_helpers.settings_esign_url(**Stonesign.default_url_options)
 
       composer = HexaPDF::Composer.new(skip_page_creation: true)
       composer.document.fonts.add(FONT_BOLD_NAME, variant: :bold)
@@ -97,7 +97,7 @@ module Submissions
         end
 
         link =
-          Rails.application.routes.url_helpers.rails_blob_url(document, **Docuseal.default_url_options)
+          Rails.application.routes.url_helpers.rails_blob_url(document, **Stonesign.default_url_options)
 
         [
           composer.document.layout.formatted_text_box(
@@ -222,7 +222,7 @@ module Submissions
                 Array.wrap(value).map do |uuid|
                   attachment = submitter.attachments.find { |a| a.uuid == uuid }
                   link =
-                    Rails.application.routes.url_helpers.rails_blob_url(attachment, **Docuseal.default_url_options)
+                    Rails.application.routes.url_helpers.rails_blob_url(attachment, **Stonesign.default_url_options)
 
                   { link:, text: "#{attachment.filename}\n", style: :link }
                 end,
@@ -273,7 +273,7 @@ module Submissions
 
       io = StringIO.new
 
-      composer.document.trailer.info[:Creator] = "#{Docuseal.product_name} (#{Docuseal::PRODUCT_URL})"
+      composer.document.trailer.info[:Creator] = "#{Stonesign.product_name} (#{Stonesign::PRODUCT_URL})"
 
       sign_params = {
         reason: SIGN_REASON,
@@ -309,8 +309,8 @@ module Submissions
     def add_logo(column, _submission = nil)
       column.image(PdfIcons.logo_io, width: 40, height: 40, position: :float)
 
-      column.formatted_text([{ text: 'DocuSeal',
-                               link: Docuseal::PRODUCT_URL }],
+      column.formatted_text([{ text: 'StoneSign',
+                               link: Stonesign::PRODUCT_URL }],
                             font_size: 20,
                             font: [FONT_BOLD_NAME, { variant: :bold }],
                             width: 100,

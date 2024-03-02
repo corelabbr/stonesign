@@ -4,7 +4,7 @@ class SubmittersSendEmailController < ApplicationController
   load_and_authorize_resource :submitter, id_param: :submitter_slug, find_by: :slug
 
   def create
-    if Docuseal.multitenant? && SubmissionEvent.exists?(submitter: @submitter,
+    if Stonesign.multitenant? && SubmissionEvent.exists?(submitter: @submitter,
                                                         event_type: 'send_email',
                                                         created_at: 24.hours.ago..Time.current)
       return redirect_back(fallback_location: submission_path(@submitter.submission),

@@ -16,7 +16,7 @@ module LoadActiveStorageConfigs
   end
 
   def reload
-    return if Docuseal.multitenant?
+    return if Stonesign.multitenant?
     return if IS_ENV_CONFIGURED
     return if Rails.env.test?
 

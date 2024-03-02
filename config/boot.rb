@@ -6,7 +6,7 @@ if ENV['RAILS_ENV'] == 'production' && ENV['SECRET_KEY_BASE'].to_s.empty?
   require 'dotenv'
   require 'securerandom'
 
-  dotenv_path = "#{ENV.fetch('WORKDIR', '.')}/docuseal.env"
+  dotenv_path = "#{ENV.fetch('WORKDIR', '.')}/stonesign.env"
 
   unless File.exist?(dotenv_path)
     default_env = <<~TEXT

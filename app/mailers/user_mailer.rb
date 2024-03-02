@@ -7,6 +7,6 @@ class UserMailer < ApplicationMailer
     @token = @user.send(:set_reset_password_token)
 
     mail(to: @user.friendly_name,
-         subject: 'You are invited to DocuSeal')
+         subject: 'You are invited to StoneSign')
   end
 end
