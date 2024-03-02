@@ -71,7 +71,7 @@ RSpec.describe 'App Setup' do
       sign_in(user)
       visit setup_index_path
 
-      expect(page).to have_content('Welcome to DocuSeal')
+      expect(page).to have_content('Welcome to StoneSign')
     end
   end
 

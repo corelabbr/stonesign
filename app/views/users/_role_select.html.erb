@@ -5,9 +5,9 @@
     <option value="editor" disabled>Editor</option>
     <option value="viewer" disabled>Viewer</option>
   <% end %>
-  <a class="text-sm mt-3 px-4 py-2 bg-base-300 rounded-full block" target="_blank" href="<%= "#{Docuseal::CONSOLE_URL}/#{Docuseal.multitenant? ? 'plans' : 'on_premise'}" %>">
+  <a class="text-sm mt-3 px-4 py-2 bg-base-300 rounded-full block" target="_blank" href="<%= "#{Stonesign::CONSOLE_URL}/#{Stonesign.multitenant? ? 'plans' : 'on_premise'}" %>">
     <%= svg_icon('info_circle', class: 'w-4 h-4 inline align-text-bottom') %>
-    Unlock more user roles with DocuSeal Pro.
+    Unlock more user roles with StoneSign Pro.
     <span class="link font-medium">Learn More</a>
   </a>
 </div>

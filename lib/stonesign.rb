@@ -1,30 +1,30 @@
 # frozen_string_literal: true
 
-module Docuseal
-  PRODUCT_URL = 'https://www.docuseal.co'
+module Stonesign
+  PRODUCT_URL = 'https://www.stonesign.com.br'
   NEWSLETTER_URL = "#{PRODUCT_URL}/newsletters".freeze
   ENQUIRIES_URL = "#{PRODUCT_URL}/enquiries".freeze
-  PRODUCT_NAME = 'DocuSeal'
+  PRODUCT_NAME = 'StoneSign'
   DEFAULT_APP_URL = 'http://localhost:3000'
-  GITHUB_URL = 'https://github.com/docusealco/docuseal'
+  CORELAB_URL = 'https://www.corelab.com.br'
   DISCORD_URL = 'https://discord.gg/qygYCDGck9'
-  TWITTER_URL = 'https://twitter.com/docusealco'
-  TWITTER_HANDLE = '@docusealco'
-  SUPPORT_EMAIL = 'support@docuseal.co'
+  TWITTER_URL = 'https://twitter.com/stonesignco'
+  TWITTER_HANDLE = '@stonesign'
+  SUPPORT_EMAIL = 'contato@stonesign.com.br'
   HOST = ENV.fetch('HOST', 'localhost')
   CONSOLE_URL = if Rails.env.development?
                   'http://console.localhost.io:3001'
                 elsif ENV['MULTITENANT'] == 'true'
                   "https://console.#{HOST}"
                 else
-                  'https://console.docuseal.co'
+                  'https://console.stonesign.com.br'
                 end
   CDN_URL = if Rails.env.development?
               'http://localhost:3000'
             elsif ENV['MULTITENANT'] == 'true'
               "https://cdn.#{HOST}"
             else
-              'https://cdn.docuseal.co'
+              'https://cdn.stonesign.com.br'
             end
 
   CERTS = JSON.parse(ENV.fetch('CERTS', '{}'))

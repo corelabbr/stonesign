@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class SendFormCompletedWebhookRequestJob < ApplicationJob
-  USER_AGENT = 'DocuSeal.co Webhook'
+  USER_AGENT = 'StoneSign.co Webhook'
 
   def perform(submitter)
     config = Accounts.load_webhook_configs(submitter.submission.account)
@@ -10,7 +10,7 @@ class SendFormCompletedWebhookRequestJob < ApplicationJob
 
     Submissions::EnsureResultGenerated.call(submitter)
 
-    ActiveStorage::Current.url_options = Docuseal.default_url_options
+    ActiveStorage::Current.url_options = Stonesign.default_url_options
 
     Faraday.post(config.value,
                  {

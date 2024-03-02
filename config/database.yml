@@ -5,11 +5,11 @@ default: &default
 
 development:
   <<: *default
-  database: docuseal_dev
+  database: stonesign_dev
 
 test:
   <<: *default
-  database: docuseal_test
+  database: stonesign_test
 
 production:
 <% if !ENV['DATABASE_HOST'].to_s.empty? %>

@@ -30,7 +30,7 @@ class AccountsController < ApplicationController
 
     @encrypted_config.save!
 
-    Docuseal.refresh_default_url_options!
+    Stonesign.refresh_default_url_options!
 
     redirect_to settings_account_path, notice: 'Account information has been updated'
   rescue ActiveRecord::RecordInvalid

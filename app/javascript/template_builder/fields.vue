@@ -97,7 +97,7 @@
         data-tip="Unlock SMS-verified phone number field with paid plan. Use text field for phone numbers without verification."
       >
         <a
-          href="https://www.docuseal.co/pricing"
+          href="https://www.stonesign.com.br/pricing"
           target="_blank"
           class="opacity-50 flex items-center justify-center border border-dashed border-base-300 w-full rounded relative"
           :style="{ backgroundColor: backgroundColor }"

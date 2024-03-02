@@ -10,7 +10,7 @@
       <li>
         <%= link_to 'Account', settings_account_path, class: 'text-base hover:bg-base-300' %>
       </li>
-      <% unless Docuseal.multitenant? %>
+      <% unless Stonesign.multitenant? %>
         <% if can?(:read, EncryptedConfig.new(key: EncryptedConfig::EMAIL_SMTP_KEY, account: current_account)) && ENV['SMTP_ADDRESS'].blank? %>
           <li>
             <%= link_to 'Email', settings_email_index_path, class: 'text-base hover:bg-base-300' %>
@@ -42,14 +42,14 @@
           <%= link_to 'Team', settings_users_path, class: 'text-base hover:bg-base-300' %>
         </li>
       <% end %>
-      <% unless Docuseal.multitenant? %>
+      <% unless Stonesign.multitenant? %>
         <% if can?(:read, EncryptedConfig.new(key: 'saml_configs', account: current_account)) %>
           <li>
             <%= link_to 'SSO', settings_sso_index_path, class: 'text-base hover:bg-base-300' %>
           </li>
         <% end %>
       <% end %>
-      <% if Docuseal.demo? || !Docuseal.multitenant? %>
+      <% if Stonesign.demo? || !Stonesign.multitenant? %>
         <% if can?(:read, AccessToken) %>
           <li>
             <%= link_to 'API', settings_api_index_path, class: 'text-base hover:bg-base-300' %>
@@ -67,23 +67,23 @@
         </li>
       <% end %>
       <%= render 'shared/settings_nav_extra' %>
-      <% if !Docuseal.demo? && can?(:manage, EncryptedConfig) %>
+      <% if !Stonesign.demo? && can?(:manage, EncryptedConfig) %>
         <li>
-          <%= link_to Docuseal.multitenant? ? console_redirect_index_path(redir: "#{Docuseal::CONSOLE_URL}/plans") : "#{Docuseal::CONSOLE_URL}/on_premise", class: 'text-base hover:bg-base-300', data: { prefetch: false } do %>
+          <%= link_to Stonesign.multitenant? ? console_redirect_index_path(redir: "#{Stonesign::CONSOLE_URL}/plans") : "#{Stonesign::CONSOLE_URL}/on_premise", class: 'text-base hover:bg-base-300', data: { prefetch: false } do %>
             Plans
             <span class="badge badge-warning">New</span>
           <% end %>
         </li>
       <% end %>
-      <% if !Docuseal.demo? && can?(:manage, EncryptedConfig) %>
+      <% if !Stonesign.demo? && can?(:manage, EncryptedConfig) %>
         <li>
-          <%= link_to Docuseal.multitenant? ? console_redirect_index_path(redir: "#{Docuseal::CONSOLE_URL}/api") : "#{Docuseal::CONSOLE_URL}/on_premise", class: 'text-base hover:bg-base-300', data: { prefetch: false } do %>
-            <% if Docuseal.multitenant? %> API <% else %> Console <% end %>
+          <%= link_to Stonesign.multitenant? ? console_redirect_index_path(redir: "#{Stonesign::CONSOLE_URL}/api") : "#{Stonesign::CONSOLE_URL}/on_premise", class: 'text-base hover:bg-base-300', data: { prefetch: false } do %>
+            <% if Stonesign.multitenant? %> API <% else %> Console <% end %>
           <% end %>
         </li>
-        <% if Docuseal.multitenant? %>
+        <% if Stonesign.multitenant? %>
           <li>
-            <%= link_to console_redirect_index_path(redir: "#{Docuseal::CONSOLE_URL}/embedding/form"), class: 'text-base hover:bg-base-300', data: { prefetch: false } do %>
+            <%= link_to console_redirect_index_path(redir: "#{Stonesign::CONSOLE_URL}/embedding/form"), class: 'text-base hover:bg-base-300', data: { prefetch: false } do %>
               Embedding
             <% end %>
           </li>
@@ -97,28 +97,28 @@
         Need help? Ask a question:
       </div>
       <div class="flex mt-3 space-x-3">
-        <div class="tooltip" data-tip="GitHub">
-          <a href="<%= Docuseal::GITHUB_URL %>" target="_blank" class="btn btn-circle btn-primary btn-md">
-            <%= svg_icon('brand_github', class: 'w-8 h-8') %>
+        <div class="tooltip" data-tip="Corelab">
+          <a href="<%= Stonesign::CORELAB_URL %>" target="_blank" class="btn btn-circle btn-primary btn-md">
+            <%= svg_icon('brand_corelab', class: 'w-8 h-8') %>
           </a>
         </div>
         <div class="tooltip" data-tip="Discord Community">
-          <a href="<%= Docuseal::DISCORD_URL %>" target="_blank" class="btn btn-circle btn-primary btn-md">
+          <a href="<%= Stonesign::DISCORD_URL %>" target="_blank" class="btn btn-circle btn-primary btn-md">
             <%= svg_icon('brand_discord', class: 'w-8 h-8') %>
           </a>
         </div>
         <div class="tooltip" data-tip="Twitter">
-          <a href="<%= Docuseal::TWITTER_URL %>" target="_blank" class="btn btn-circle btn-primary btn-md">
+          <a href="<%= Stonesign::TWITTER_URL %>" target="_blank" class="btn btn-circle btn-primary btn-md">
             <%= svg_icon('brand_twitter', class: 'w-8 h-8') %>
           </a>
         </div>
       </div>
-      <a href="mailto:<%= Docuseal::SUPPORT_EMAIL %>" target="_blank" class="w-full block mt-4 underline text-center">
-        <%= Docuseal::SUPPORT_EMAIL %>
+      <a href="mailto:<%= Stonesign::SUPPORT_EMAIL %>" target="_blank" class="w-full block mt-4 underline text-center">
+        <%= Stonesign::SUPPORT_EMAIL %>
       </a>
-      <% if Docuseal.version.present? %>
-        <a href="https://github.com/docusealco/docuseal/releases" target="_blank" class="badge badge-outline text-xs block mx-auto mt-4">
-          v<%= Docuseal.version %>
+      <% if Stonesign.version.present? %>
+        <a href="https://github.com/corelabbr/stonesign/releases" target="_blank" class="badge badge-outline text-xs block mx-auto mt-4">
+          v<%= Stonesign.version %>
         </a>
       <% end %>
     </div>

@@ -11,7 +11,7 @@ module Accounts
     new_user.uuid = SecureRandom.uuid
     new_user.account = new_account
     new_user.encrypted_password = SecureRandom.hex
-    new_user.email = "#{SecureRandom.hex}@docuseal.co"
+    new_user.email = "#{SecureRandom.hex}@stonesign.com.br"
 
     account.templates.each do |template|
       new_template = template.dup
@@ -49,7 +49,7 @@ module Accounts
   def load_webhook_configs(account)
     configs = account.encrypted_configs.find_by(key: EncryptedConfig::WEBHOOK_URL_KEY)
 
-    unless Docuseal.multitenant?
+    unless Stonesign.multitenant?
       configs ||= Account.order(:id).first.encrypted_configs.find_by(key: EncryptedConfig::WEBHOOK_URL_KEY)
     end
 
@@ -58,8 +58,8 @@ module Accounts
 
   def load_signing_pkcs(account)
     cert_data =
-      if Docuseal.multitenant?
-        EncryptedConfig.find_by(account:, key: EncryptedConfig::ESIGN_CERTS_KEY)&.value || Docuseal::CERTS
+      if Stonesign.multitenant?
+        EncryptedConfig.find_by(account:, key: EncryptedConfig::ESIGN_CERTS_KEY)&.value || Stonesign::CERTS
       else
         EncryptedConfig.find_by(key: EncryptedConfig::ESIGN_CERTS_KEY).value
       end
@@ -72,12 +72,12 @@ module Accounts
   end
 
   def load_timeserver_url(account)
-    if Docuseal.multitenant?
-      Docuseal::TIMESERVER_URL
+    if Stonesign.multitenant?
+      Stonesign::TIMESERVER_URL
     else
       url = EncryptedConfig.find_by(account:, key: EncryptedConfig::TIMESTAMP_SERVER_URL_KEY)&.value
 
-      unless Docuseal.multitenant?
+      unless Stonesign.multitenant?
         url ||=
           Account.order(:id).first.encrypted_configs.find_by(key: EncryptedConfig::TIMESTAMP_SERVER_URL_KEY)&.value
       end
@@ -87,7 +87,7 @@ module Accounts
   end
 
   def can_send_emails?(_account)
-    return true if Docuseal.multitenant?
+    return true if Stonesign.multitenant?
     return true if ENV['SMTP_ADDRESS'].present?
 
     EncryptedConfig.exists?(key: EncryptedConfig::EMAIL_SMTP_KEY)

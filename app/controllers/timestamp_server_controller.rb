@@ -5,7 +5,7 @@ class TimestampServerController < ApplicationController
   authorize_resource :encrypted_config
 
   def create
-    return head :not_found if Docuseal.multitenant?
+    return head :not_found if Stonesign.multitenant?
 
     test_timeserver_url(@encrypted_config.value) if @encrypted_config.value.present?
 

@@ -5,7 +5,7 @@
 # Table name: access_tokens
 #
 #  id         :bigint           not null, primary key
-#  sha256     :text             not null
+#  sha256     :string           not null
 #  token      :text             not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null

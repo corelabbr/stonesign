@@ -20,7 +20,7 @@ class MfaSetupController < ApplicationController
 
       redirect_to settings_profile_index_path, notice: '2FA has been configured'
     else
-      @provision_url = current_user.otp_provisioning_uri(current_user.email, issuer: Docuseal.product_name)
+      @provision_url = current_user.otp_provisioning_uri(current_user.email, issuer: Stonesign.product_name)
 
       @error_message = 'Code is invalid'
 
@@ -49,6 +49,6 @@ class MfaSetupController < ApplicationController
 
     current_user.save!
 
-    @provision_url = current_user.otp_provisioning_uri(current_user.email, issuer: Docuseal.product_name)
+    @provision_url = current_user.otp_provisioning_uri(current_user.email, issuer: Stonesign.product_name)
   end
 end

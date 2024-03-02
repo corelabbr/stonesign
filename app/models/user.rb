@@ -25,7 +25,7 @@
 #  role                   :string           not null
 #  sign_in_count          :integer          default(0), not null
 #  unlock_token           :string
-#  uuid                   :text             not null
+#  uuid                   :string           not null
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #  account_id             :bigint           not null

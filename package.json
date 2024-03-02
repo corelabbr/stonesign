@@ -1,5 +1,5 @@
 {
-  "name": "docuseal",
+  "name": "stonesign",
   "private": true,
   "dependencies": {
     "@babel/core": "7.21.8",
@@ -7,7 +7,7 @@
     "@babel/preset-env": "7.21.5",
     "@babel/runtime": "7.21.5",
     "@github/catalyst": "^2.0.0-beta",
-    "@hotwired/turbo": "https://github.com/docusealco/turbo#main",
+    "@hotwired/turbo": "8.0.2",
     "@hotwired/turbo-rails": "^7.3.0",
     "@rails/activestorage": "^7.0.0",
     "@tabler/icons-vue": "^2.20.0",

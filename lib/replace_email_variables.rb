@@ -44,7 +44,7 @@ module ReplaceEmailVariables
 
   def build_documents_links_text(submitter)
     Rails.application.routes.url_helpers.submissions_preview_url(
-      submitter.submission.slug, **Docuseal.default_url_options
+      submitter.submission.slug, **Stonesign.default_url_options
     )
   end
 
@@ -53,19 +53,19 @@ module ReplaceEmailVariables
       Rails.application.routes.url_helpers.submit_form_url(
         slug: submitter.slug,
         t: SubmissionEvents.build_tracking_param(submitter, 'click_email'),
-        **Docuseal.default_url_options
+        **Stonesign.default_url_options
       )
     else
       Rails.application.routes.url_helpers.submit_form_url(
         slug: submitter.slug,
         c: SubmissionEvents.build_tracking_param(submitter, 'click_sms'),
-        **Docuseal.default_url_options
+        **Stonesign.default_url_options
       )
     end
   end
 
   def build_submission_link(submission)
-    Rails.application.routes.url_helpers.submission_url(submission, **Docuseal.default_url_options)
+    Rails.application.routes.url_helpers.submission_url(submission, **Stonesign.default_url_options)
   end
 
   def build_submission_submitters(submission)

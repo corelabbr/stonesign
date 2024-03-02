@@ -22,7 +22,7 @@ module Submitters
                       'documents' => documents,
                       'audit_log_url' => submitter.submission.audit_log_url,
                       'submission_url' => r.submissions_preview_url(submitter.submission.slug,
-                                                                    **Docuseal.default_url_options),
+                                                                    **Stonesign.default_url_options),
                       'role' => submitter_name)
     end
 
@@ -66,7 +66,7 @@ module Submitters
     def rails_storage_proxy_url(attachment)
       return if attachment.blank?
 
-      r.rails_storage_proxy_url(attachment, **Docuseal.default_url_options)
+      r.rails_storage_proxy_url(attachment, **Stonesign.default_url_options)
     end
 
     def r

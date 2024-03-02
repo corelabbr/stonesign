@@ -8,7 +8,7 @@
 #  archived_at         :datetime
 #  preferences         :text             not null
 #  slug                :string           not null
-#  source              :text             not null
+#  source              :string           not null
 #  submitters_order    :string           not null
 #  template_fields     :text
 #  template_schema     :text
@@ -74,7 +74,7 @@ class Submission < ApplicationRecord
   def audit_trail_url
     return if audit_trail.blank?
 
-    Rails.application.routes.url_helpers.rails_storage_proxy_url(audit_trail, **Docuseal.default_url_options)
+    Rails.application.routes.url_helpers.rails_storage_proxy_url(audit_trail, **Stonesign.default_url_options)
   end
   alias audit_log_url audit_trail_url
 end
