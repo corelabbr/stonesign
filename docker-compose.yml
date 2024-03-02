@@ -3,41 +3,44 @@ version: '3'
 services:
   app:
     depends_on:
-      postgres:
-        condition: service_healthy
+      - postgres
+    container_name: stonesign-corelab
     #image: stonesign:latest
+    restart: unless-stopped
     build:
       context: .
-    ports:
-      - 3000:3000
+    expose:
+      - "80"
+#    ports:
+#      - 3000:3000
+    networks:
+      - stone_network
     volumes:
       - .:/data
     environment:
-      - FORCE_SSL=${HOST}
-      - DATABASE_URL=postgresql://postgres:postgres@postgres:5432/stonesign
+      - HOST=stonesign.corelab.com.br
+      - DATABASE_URL=postgresql://postgres:postgres@postgres_stonesign-corelab:5432/stonesign-corelab
+#      - DATABASE_URL=postgresql://postgres:postgres@postgres:5432/stonesign-corelab
+    links:
+      - postgres
 
   postgres:
     image: postgres:15
+    container_name: postgres_stonesign-corelab
+    restart: unless-stopped
     volumes:
-      - './pg_data:/var/lib/postgresql/data'
+      - stone_pg_data:/var/lib/postgresql/data
+    networks:
+      - stone_network
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: stonesign
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres"]
-      interval: 5s
-      timeout: 5s
-      retries: 5
+      POSTGRES_DB: stonesign-corelab
 
-  caddy:
-    image: caddy:latest
-    command: caddy reverse-proxy --from $HOST --to app:3000
-    ports:
-      - 80:80
-      - 443:443
-      - 443:443/udp
-    volumes:
-      - .:/data
-    environment:
-      - HOST=${HOST}
+networks:
+  stone_network:
+    driver: "bridge"
+
+volumes:
+  stone_pg_data:
+    driver: "local"

@@ -39,7 +39,8 @@ ENV BUNDLE_WITHOUT="development:test"
 
 WORKDIR /app
 
-RUN apk add --no-cache build-base sqlite-dev libpq-dev mariadb-dev vips-dev vips-poppler poppler-utils vips-heif libc6-compat ttf-freefont && mkdir /fonts
+RUN apk add --no-cache build-base sqlite-dev libpq-dev mariadb-dev vips-dev vips-poppler poppler-utils vips-heif libc6-compat ttf-freefont
+RUN mkdir /fonts
 
 COPY ./Gemfile ./
 
@@ -56,14 +57,14 @@ COPY ./public ./public
 COPY ./tmp ./tmp
 COPY LICENSE README.md Rakefile config.ru .version ./
 
-COPY --from=fonts /fonts/LiberationSans-Regular.ttf /fonts/LiberationSans-Bold.ttf /fonts/DancingScript-Regular.otf /fonts/OFL.txt /fonts
+COPY --from=fonts /fonts/LiberationSans-Regular.ttf /fonts/LiberationSans-Bold.ttf /fonts/DancingScript-Regular.otf /fonts/OFL.txt /fonts/
 COPY --from=webpack /app/public/packs ./public/packs
 
 RUN ln -s /fonts /app/public/fonts
 RUN bundle exec bootsnap precompile --gemfile app/ lib/
 
-WORKDIR /data/stonesign
-ENV WORKDIR=/data/stonesign
+WORKDIR /data/stonesign-corelab
+ENV WORKDIR=/data/stonesign-corelab
 
 EXPOSE 3000
 CMD ["/app/bin/rails", "server"]
