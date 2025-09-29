@@ -15,6 +15,10 @@ class SetupController < ApplicationController
   end
 
   def create
+    normalize_param_keys!
+
+    Rails.logger.debug "[PARAMS] #{params.to_unsafe_h.inspect}"
+
     @account = Account.new(account_params)
     @account.timezone = Accounts.normalize_timezone(@account.timezone)
     @user = @account.users.new(user_params)
@@ -71,5 +75,11 @@ class SetupController < ApplicationController
 
   def ensure_first_user_not_created!
     redirect_to new_user_session_path, notice: 'Please sign in.' if User.exists?
+  end
+
+  def normalize_param_keys!
+    params[:user] ||= params.delete("[user]")
+    params[:account] ||= params.delete("[account]")
+    params[:encrypted_config] ||= params.delete("[encrypted_config]")
   end
 end

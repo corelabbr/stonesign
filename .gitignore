@@ -38,3 +38,10 @@ yarn-debug.log*
 /ee
 /pg_data
 /caddy
+
+
+.ruby-version
+.vscode/
+*.lock
+package-lock.json
+*.pem

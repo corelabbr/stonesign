@@ -75,3 +75,10 @@ At StoneSign we have expertise and technologies to make documents creation, fill
 
 Distributed under the AGPLv3 License. See [LICENSE](https://github.com/corelabbr/stonesign/blob/master/LICENSE) for more information.
 Unless otherwise noted, all files © 2023 StoneSign LLC.
+
+
+bundle exec rails db:create db:migrate
+bundle exec rails db:seed
+npm install
+
+bin/shakapacker-dev-server
