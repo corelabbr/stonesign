@@ -22,13 +22,13 @@ gem 'jwt'
 gem 'lograge'
 gem 'mysql2', require: false
 gem 'oj'
-gem 'pagy'
+gem 'pagy', '>= 5.6.0'
 gem 'pdf-reader'
 gem 'pg', require: false
 gem 'premailer-rails'
 gem 'puma'
 gem 'rack'
-gem 'rails'
+gem 'rails', '~> 7.1.3' # ou a versão mais atual usada no projeto
 gem 'rails_autolink'
 gem 'rails-i18n'
 gem 'rollbar', require: ENV.key?('ROLLBAR_ACCESS_TOKEN')
@@ -63,6 +63,7 @@ end
 group :development do
   gem 'letter_opener_web'
   gem 'web-console'
+  gem 'debug'
 end
 
 group :test do

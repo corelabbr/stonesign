@@ -1,21 +1,22 @@
-<% link = pagy_link_proc(@pagy) %>
 <% if @pagy.pages > 1 %>
   <div class="flex my-6 justify-center md:justify-between">
     <div class="hidden md:block text-sm">
-      <%= @pagy.from %>-<%= local_assigns.fetch(:to, @pagy.to) %> of <%= local_assigns.fetch(:count, @pagy.count) %> <%= local_assigns[:items_name] || 'items' %>
+      <%= @pagy.from %>-<%= @pagy.to %> of <%= @pagy.count %> <%= local_assigns[:items_name] || 'items' %>
       <%= local_assigns[:left_additional_html] %>
     </div>
     <div class="join">
       <% if @pagy.prev %>
-        <%== link.call(@pagy.prev, '«', 'class="join-item btn min-h-full h-10"') %>
+        <%= link_to '«', pagy_url_for(@pagy.prev, @pagy), class: 'join-item btn min-h-full h-10' %>
       <% else %>
         <span class="join-item btn btn-disabled !bg-base-200 min-h-full h-10">«</span>
       <% end %>
+
       <span class="join-item btn uppercase min-h-full h-10">
         Page <%= @pagy.page %>
       </span>
+
       <% if @pagy.next %>
-        <%== link.call(@pagy.next, '»', 'class="join-item btn min-h-full h-10"') %>
+        <%= link_to '»', pagy_url_for(@pagy.next, @pagy), class: 'join-item btn min-h-full h-10' %>
       <% else %>
         <span class="join-item btn btn-disabled !bg-base-200 min-h-full h-10">»</span>
       <% end %>
