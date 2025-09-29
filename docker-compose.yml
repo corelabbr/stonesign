@@ -19,6 +19,7 @@ services:
       - .:/data
     environment:
       - HOST=stonesign.corelab.com.br
+      - FORCE_SSL=true
       - DATABASE_URL=postgresql://postgres:postgres@postgres_stonesign-corelab:5432/stonesign-corelab
 #      - DATABASE_URL=postgresql://postgres:postgres@postgres:5432/stonesign-corelab
     links:
