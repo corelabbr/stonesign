@@ -14,7 +14,7 @@ services:
 #    ports:
 #      - 3000:3000
     networks:
-      - stone_network
+      - stonesign-corelab-network
     volumes:
       - .:/data
     environment:
@@ -31,14 +31,14 @@ services:
     volumes:
       - stone_pg_data:/var/lib/postgresql/data
     networks:
-      - stone_network
+      - stonesign-corelab-network
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: stonesign-corelab
 
 networks:
-  stone_network:
+  stonesign-corelab-network:
     driver: "bridge"
 
 volumes:
