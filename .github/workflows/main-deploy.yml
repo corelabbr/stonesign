@@ -1,0 +1,44 @@
+name: Build and Deploy
+
+on:
+  push:
+    branches:
+      - develop
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v5
+
+      - name: Login no registry
+        uses: docker/login-action@v3
+        with:
+          registry: registry.corelab.com.br:5000
+          username: ${{ secrets.REGISTRY_USER }}
+          password: ${{ secrets.REGISTRY_PASS }}
+
+      - name: Build imagem
+        run: |
+          docker build -t registry.corelab.com.br:5000/stonesign-corelab:latest .
+
+      - name: Push imagem
+        run: docker push registry.corelab.com.br:5000/stonesign-corelab:latest
+
+#  deploy:
+#    runs-on: ubuntu-latest
+#    needs: build
+#    steps:
+#      - name: Rodar docker-compose no servidor
+#        uses: appleboy/ssh-action@v1.2.2
+#        with:
+#          host: ${{ secrets.SERVER_HOST }}
+#          username: ${{ secrets.SERVER_USER }}
+#          key: ${{ secrets.SERVER_SSH_KEY }}
+#          script: |
+#            docker login registry.corelab.com.br:5000 -u ${{ secrets.REGISTRY_USER }} -p ${{ secrets.REGISTRY_PASS }}
+#            cd ~/stonesign-corelab
+#            docker-compose down
+#            docker-compose pull
+#            docker-compose up -d
