@@ -30,6 +30,9 @@ COPY ./tailwind.application.config.js ./tailwind.application.config.js ./
 COPY ./app/javascript ./app/javascript
 COPY ./app/views ./app/views
 
+COPY Gemfile Gemfile.lock ./
+RUN bundle install --jobs 4 --retry 3
+COPY ./bin/shakapacker ./bin/shakapacker
 RUN ./bin/shakapacker
 #RUN echo "gem 'shakapacker'" > Gemfile && ./bin/shakapacker
 
