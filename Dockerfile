@@ -43,7 +43,24 @@ ENV BUNDLE_WITHOUT="development:test"
 
 WORKDIR /app
 
-RUN apk add --no-cache build-base sqlite-dev libpq-dev mariadb-dev vips-dev vips-poppler poppler-utils vips-heif libc6-compat ttf-freefont
+#RUN apk add --no-cache build-base sqlite-dev libpq-dev mariadb-dev vips-dev vips-poppler poppler-utils vips-heif libc6-compat ttf-freefont
+RUN apk add --no-cache \
+    build-base \
+    sqlite-dev \
+    libpq-dev \
+    mariadb-dev \
+    vips-dev \
+    vips-poppler \
+    poppler-utils \
+    vips-heif \
+    libc6-compat \
+    ttf-freefont \
+    openssl-dev \
+    libffi-dev \
+    zlib-dev \
+    readline-dev \
+    yaml-dev
+    
 RUN mkdir /fonts
 
 COPY ./Gemfile ./
@@ -67,8 +84,8 @@ COPY --from=webpack /app/public/packs ./public/packs
 RUN ln -s /fonts /app/public/fonts
 RUN bundle exec bootsnap precompile --gemfile app/ lib/
 
-WORKDIR /data/stonesign-corelab
-ENV WORKDIR=/data/stonesign-corelab
+#WORKDIR /data/stonesign-corelab
+#ENV WORKDIR=/data/stonesign-corelab
 
-EXPOSE 3000
-CMD ["/app/bin/rails", "server"]
+#EXPOSE 3000
+#CMD ["/app/bin/rails", "server"]
