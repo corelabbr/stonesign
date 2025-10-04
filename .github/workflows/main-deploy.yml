@@ -28,7 +28,7 @@ jobs:
           context: .
           push: true
           tags: ${{ vars.DOCKER_REGISTRY }}/stonesign-corelab:latest
-          cache-from: type=registry,ref=${{ vars.DOCKER_REGISTRY }}/stonesign-corelab:buildcache
+#          cache-from: type=registry,ref=${{ vars.DOCKER_REGISTRY }}/stonesign-corelab:buildcache
           cache-to: type=registry,ref=${{ vars.DOCKER_REGISTRY }}/stonesign-corelab:buildcache,mode=max
 
 #  deploy:
