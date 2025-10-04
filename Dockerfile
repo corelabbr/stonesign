@@ -14,6 +14,9 @@ ENV NODE_ENV=production
 WORKDIR /app
 
 RUN apk add --no-cache \
+    nodejs \
+    yarn \
+    git \
     build-base \
     mariadb-dev \
     sqlite-dev \
