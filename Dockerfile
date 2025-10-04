@@ -102,8 +102,8 @@ COPY --from=webpack /app/public/packs ./public/packs
 RUN ln -s /fonts /app/public/fonts
 RUN bundle exec bootsnap precompile --gemfile app/ lib/
 
-#WORKDIR /data/stonesign-corelab
-#ENV WORKDIR=/data/stonesign-corelab
+WORKDIR /data/stonesign-corelab
+ENV WORKDIR=/data/stonesign-corelab
 
-#EXPOSE 3000
-#CMD ["/app/bin/rails", "server"]
+EXPOSE 3000
+CMD ["/app/bin/rails", "server"]
