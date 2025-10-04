@@ -15,15 +15,20 @@ WORKDIR /app
 
 RUN apk add --no-cache \
     build-base \
-    git \
-    nodejs \
-    yarn \
+    mariadb-dev \
+    sqlite-dev \
+    libpq-dev \
+    vips-dev \
+    vips-poppler \
+    poppler-utils \
+    vips-heif \
+    libc6-compat \
+    ttf-freefont \
     openssl-dev \
     libffi-dev \
     zlib-dev \
     readline-dev \
-    yaml-dev && \
-    gem install shakapacker
+    yaml-dev
 #RUN apk add --no-cache nodejs yarn git build-base && \
 #    gem install shakapacker
 
