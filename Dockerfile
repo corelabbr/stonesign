@@ -13,8 +13,27 @@ ENV NODE_ENV=production
 
 WORKDIR /app
 
-RUN apk add --no-cache nodejs yarn git build-base && \
-    gem install shakapacker
+RUN apk add --no-cache \
+    nodejs \
+    yarn \
+    git \
+    build-base \
+    mariadb-dev \
+    sqlite-dev \
+    libpq-dev \
+    vips-dev \
+    vips-poppler \
+    poppler-utils \
+    vips-heif \
+    libc6-compat \
+    ttf-freefont \
+    openssl-dev \
+    libffi-dev \
+    zlib-dev \
+    readline-dev \
+    yaml-dev
+#RUN apk add --no-cache nodejs yarn git build-base && \
+#    gem install shakapacker
 
 COPY ./package.json ./
 
@@ -30,7 +49,10 @@ COPY ./tailwind.application.config.js ./tailwind.application.config.js ./
 COPY ./app/javascript ./app/javascript
 COPY ./app/views ./app/views
 
-RUN echo "gem 'shakapacker'" > Gemfile && ./bin/shakapacker
+COPY Gemfile ./
+RUN bundle install --jobs 4 --retry 3
+RUN ./bin/shakapacker
+#RUN echo "gem 'shakapacker'" > Gemfile && ./bin/shakapacker
 
 FROM ruby:3.2.2-alpine3.18 as app
 
@@ -39,7 +61,24 @@ ENV BUNDLE_WITHOUT="development:test"
 
 WORKDIR /app
 
-RUN apk add --no-cache build-base sqlite-dev libpq-dev mariadb-dev vips-dev vips-poppler poppler-utils vips-heif libc6-compat ttf-freefont
+#RUN apk add --no-cache build-base sqlite-dev libpq-dev mariadb-dev vips-dev vips-poppler poppler-utils vips-heif libc6-compat ttf-freefont
+RUN apk add --no-cache \
+    build-base \
+    sqlite-dev \
+    libpq-dev \
+    mariadb-dev \
+    vips-dev \
+    vips-poppler \
+    poppler-utils \
+    vips-heif \
+    libc6-compat \
+    ttf-freefont \
+    openssl-dev \
+    libffi-dev \
+    zlib-dev \
+    readline-dev \
+    yaml-dev
+    
 RUN mkdir /fonts
 
 COPY ./Gemfile ./

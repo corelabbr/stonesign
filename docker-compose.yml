@@ -2,46 +2,18 @@ version: '3'
 
 services:
   app:
-    depends_on:
-      - postgres
     container_name: stonesign-corelab
-    #image: stonesign:latest
+    image: registry.corelab.com.br:5000/stonesign-corelab:latest
     restart: unless-stopped
-    build:
-      context: .
     expose:
       - "80"
-#    ports:
-#      - 3000:3000
     networks:
       - stonesign-corelab-network
     volumes:
       - .:/data
-    environment:
-      - HOST=stonesign.corelab.com.br
-      - FORCE_SSL=true
-      - DATABASE_URL=postgresql://postgres:postgres@postgres_stonesign-corelab:5432/stonesign-corelab
-#      - DATABASE_URL=postgresql://postgres:postgres@postgres:5432/stonesign-corelab
-    links:
-      - postgres
-
-  postgres:
-    image: postgres:15
-    container_name: postgres_stonesign-corelab
-    restart: unless-stopped
-    volumes:
-      - stone_pg_data:/var/lib/postgresql/data
-    networks:
-      - stonesign-corelab-network
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: stonesign-corelab
+    env_file:
+      - .env   # pega as variáveis na pasta do projeto no servidor
 
 networks:
   stonesign-corelab-network:
     driver: "bridge"
-
-volumes:
-  stone_pg_data:
-    driver: "local"
