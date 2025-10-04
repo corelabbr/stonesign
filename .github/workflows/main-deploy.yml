@@ -44,6 +44,5 @@ jobs:
           script: |
             docker login ${{ vars.DOCKER_REGISTRY }} -u ${{ secrets.REGISTRY_USER }} -p ${{ secrets.REGISTRY_PASS }}
             cd ~/stonesign-corelab
-            docker-compose down
             docker-compose pull
             docker-compose up -d
