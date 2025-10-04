@@ -13,8 +13,19 @@ ENV NODE_ENV=production
 
 WORKDIR /app
 
-RUN apk add --no-cache nodejs yarn git build-base && \
+RUN apk add --no-cache \
+    build-base \
+    git \
+    nodejs \
+    yarn \
+    openssl-dev \
+    libffi-dev \
+    zlib-dev \
+    readline-dev \
+    yaml-dev && \
     gem install shakapacker
+#RUN apk add --no-cache nodejs yarn git build-base && \
+#    gem install shakapacker
 
 COPY ./package.json ./
 
@@ -32,7 +43,6 @@ COPY ./app/views ./app/views
 
 COPY Gemfile ./
 RUN bundle install --jobs 4 --retry 3
-COPY ./bin/shakapacker ./bin/shakapacker
 RUN ./bin/shakapacker
 #RUN echo "gem 'shakapacker'" > Gemfile && ./bin/shakapacker
 
