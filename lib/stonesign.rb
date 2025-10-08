@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Stonesign
-  PRODUCT_URL = ENV.fetch('PRODUCT_URL', 'https://www.stonesign.com.br')
+  PRODUCT_URL = ENV.fetch('PRODUCT_URL', 'https://stonesign.corelab.com.br')
   NEWSLETTER_URL = "#{PRODUCT_URL}/newsletters".freeze
   ENQUIRIES_URL = "#{PRODUCT_URL}/enquiries".freeze
   PRODUCT_NAME = 'StoneSign'

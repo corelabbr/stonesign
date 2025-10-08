@@ -1,6 +1,6 @@
 <h1 align="center" style="border-bottom: none">
   <div>
-    <a href="https://www.stonesign.com.br">
+    <a href="https://stonesign.corelab.com.br">
       <img  alt="StoneSign" src="https://github.com/corelabbr/stonesign/assets/5418788/c12cd051-81cd-4402-bc3a-92f2cfdc1b06" width="80" />
       <br>
     </a>
